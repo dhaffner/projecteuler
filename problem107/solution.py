@@ -11,9 +11,9 @@ from operator import add
 from itertools import product, starmap
 from heapq import heapify, heappop
 
-DOT = "network.dot"
+DOT = 'network.dot'
 
-def run(input='network.txt'):
+def run(input='network.txt', makedot=False):
     lines = map(lambda s: s.rstrip().split(','), \
                 open(input).readlines())
 
@@ -62,7 +62,8 @@ def run(input='network.txt'):
 
     # T now describes a miniumum spanning tree on G.
     # Produce a DOT language file to visualize T.
-    dot(reduce(add, T), T, weight)
+    if makedot:
+        dot(V, T, weight)
 
     # Print the savings, as to answer problem #107.
     Tweight = sum(starmap(weight, T))
@@ -85,7 +86,13 @@ def dot(V, E, weight):
 
 if __name__ == '__main__':
     import sys
-    if len(sys.argv) > 1:
-        run(sys.argv[1])
+    argv = sys.argv
+    makedot = False
+    if len(argv) > 1 and argv[1] == "--dot":
+        makedot = True
+        argv = argv[1:]
+
+    if len(argv) > 1:
+        run(argv[1], makedot=makedot)
     else:
-        run()
+        run(makedot=makedot)
