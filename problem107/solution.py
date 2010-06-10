@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
 """
-Using network.txt (right click and 'Save Link/Target As...'), a 6K text file
-containing a network with forty vertices, and given in matrix form, find the
-maximum saving which can be achieved by removing redundant edges whilst
-ensuring that the network remains connected.
+Using network.txt, a 6K text file containing a network with forty vertices, and 
+given in matrix form, find the maximum saving which can be achieved by removing 
+redundant edges whilst ensuring that the network remains connected.
 """
 
 from operator import add
@@ -71,7 +70,7 @@ def run(input='network.txt', makedot=False):
     print Gweight - Tweight
 
 def dot(V, E, weight):
-    f = open(DOT, "w+")
+    f = open(DOT, 'w+')
     f.write('graph G {\n')
     f.write('    node[fontname=Verdana,fontsize=10];\n')
     f.write('    edge[fontname=Verdana,fontsize=9,fontcolor="#44687e"];\n')
@@ -88,7 +87,7 @@ if __name__ == '__main__':
     import sys
     argv = sys.argv
     makedot = False
-    if len(argv) > 1 and argv[1] == "--dot":
+    if len(argv) > 1 and argv[1] == '--dot':
         makedot = True
         argv = argv[1:]
 
