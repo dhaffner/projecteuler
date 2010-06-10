@@ -1,1 +1,4 @@
-Solutions to Project Euler problems, not necessarily all done in the same language.
+Project Euler solutions, not necessarily all written in the same language.
+
+These solutions can usually be executed using the typical commands for their 
+respective languages (i.e "python solution.py"), unless otherwise stated.
