@@ -20,7 +20,7 @@ def run(input='triangle.txt'):
 		elif i >= len(lines) or j >= len(lines):
 			return 0
 		else:
-			C[(i, j)] = triangle(i, j) + max(maxpath(i + 1, j), \
+            C[(i, j)] = triangle(i, j) + max(maxpath(i + 1, j), \
                                              maxpath(i + 1, j + 1))
 		return C[(i, j)]
 
