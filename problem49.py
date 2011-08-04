@@ -7,7 +7,8 @@ by 3330, is unusual in two ways: (i) each of the three terms are prime, and,
 There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, 
 exhibiting this property, but there is one other 4-digit increasing sequence.
 
-What 12-digit number do you form by concatenating the three terms in this sequence?
+What 12-digit number do you form by concatenating the three terms in this 
+sequence?
 """
 from itertools import ifilter, imap, permutations
 from itertools import combinations, chain, dropwhile
