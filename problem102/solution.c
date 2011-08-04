@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 /*
 Three distinct points are plotted at random on a Cartesian plane, for which 
 -1000 <= x, y <= 1000, such that a triangle is formed.
@@ -16,9 +18,30 @@ containing the co-ordinates of one thousand "random" triangles, find the number
 of triangles for which the interior contains the origin.
 */
 
-
 int main(int argc, const char** argv)
 {
+	FILE *triangles = fopen("triangles.txt", "r");
+	char line[30];
+
+	int x1, y1;
+	int x2, y2;
+	int x3, y3;
+
+	if (triangles != NULL)
+	{
+		while (fgets(line, sizeof(line), triangles) != NULL)
+		{
+			sscanf(line, "%d,%d,%d,%d,%d,%d\n", &x1, &y1, &x2, &y2, &x3, &y3);
+			// replace the following printf line with something that checks 
+            // whether origin is in current triangle, add a counter somewhere 
+            // in here to keep a total
+			printf("(%d, %d); (%d, %d); (%d, %d)\n", x1, y1, x2, y2, x3, y3);
+		}
+		fclose(triangles);
+	}
+
+	printf("%d\n", 0); // Ultimately change this to print only the answer
+
 	return 0;
 }
 
