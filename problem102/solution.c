@@ -15,3 +15,9 @@ Using triangles.txt (right click and 'Save Link/Target As...'), a 27K text file
 containing the co-ordinates of one thousand "random" triangles, find the number 
 of triangles for which the interior contains the origin.
 */
+
+
+int main(int argc, const char** argv)
+{
+	return 0;
+}
