@@ -33,8 +33,8 @@ int main(int argc, const char** argv)
 		{
 			sscanf(line, "%d,%d,%d,%d,%d,%d\n", &x1, &y1, &x2, &y2, &x3, &y3);
 			// replace the following printf line with something that checks 
-            // whether origin is in current triangle, add a counter somewhere 
-            // in here to keep a total
+			// whether origin is in current triangle, add a counter somewhere 
+			// in here to keep a total
 			printf("(%d, %d); (%d, %d); (%d, %d)\n", x1, y1, x2, y2, x3, y3);
 		}
 		fclose(triangles);
