@@ -40,8 +40,8 @@ quadrant = lambda x, y: (x > 0 and y > 0 and Q1) or \
 # Given a line and a range (so a line segment), determine which quadrants the 
 # line passes through.
 #
-# The function below does this by x=x1 to x2 in increments of epsilon, and
-# taking the current quadrant that the point (x, f(x)) lies in. 
+# The function below does this by moving x=x1 to x2 in increments of epsilon, 
+# and taking the current quadrant that the point (x, f(x)) lies in. 
 def quadrants_touched(f, x1, x2, epsilon=7/8):
     return (x1 > x2 and quadrants_touched(f, x2, x1, epsilon)) or \
            set(filter(None, map(lambda x: quadrant(x, f(x)), \
@@ -66,7 +66,7 @@ def contains_origin(x1, y1, x2, y2, x3, y3):
             quadrants_touched(line23, x2, x3) | \
             quadrants_touched(line31, x1, x3)
 
-    # If a triangle contains the origin, the 3 line representing it will touch 
+    # If a triangle contains the origin, the 3 lines representing it will touch 
     # each quadrant.
     return quadrants == quads
 
