@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from __future__ import division
-from itertools import count, takewhile, starmap
+from itertools import count, takewhile
 
 """
 Three distinct points are plotted at random on a Cartesian plane, for which 
@@ -79,5 +79,4 @@ if __name__ == '__main__':
     # Make a list of those triangles which contain the origin, and take the
     # length of that list; the answer.
     print len(filter(lambda t: contains_origin(*t), triangles))
-
 
