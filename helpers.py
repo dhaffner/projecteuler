@@ -1,8 +1,9 @@
 #!/usr/binpython
+from itertools import chain
 from random import randint
 
 # Miller-Rabin primality test.
-# Lifted from http://www.ics.uci.edu/~eppstein/numth/egypt/egypt.py
+# Lifted directly from http://www.ics.uci.edu/~eppstein/numth/egypt/egypt.py
 def millrab(n, max=30):
     """
     Miller-Rabin primality test as per the following source:
@@ -43,3 +44,10 @@ def millrab(n, max=30):
 
 def isprime(n):
 	return millrab(n) > 0
+
+def flatten(lst):
+    return chain.from_iterable(lst)
+
+def approx_equal(a, b, epsilon=1e-3):
+    return abs(a-b) <= epsilon
+

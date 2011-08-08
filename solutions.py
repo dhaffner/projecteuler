@@ -1,25 +1,24 @@
 #!/usr/bin/python
-"""
-The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases 
-by 3330, is unusual in two ways: (i) each of the three terms are prime, and, 
-(ii) each of the 4-digit numbers are permutations of one another.
-
-There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, 
-exhibiting this property, but there is one other 4-digit increasing sequence.
-
-What 12-digit number do you form by concatenating the three terms in this 
-sequence?
-"""
 from itertools import ifilter, imap, permutations
 from itertools import combinations, chain, dropwhile
-
-from helpers import isprime
+from helpers import *
 from operator import add
 
+# for 101
+from numpy import polyfit, polyval
+
 def problem49():
-    # Flatten one level of nesting
-    flatten = lambda lst: chain.from_iterable(lst)
-    
+    """
+    The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases 
+    by 3330, is unusual in two ways: (i) each of the three terms are prime, and, 
+    (ii) each of the 4-digit numbers are permutations of one another.
+
+    There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, 
+    exhibiting this property, but there is one other 4-digit increasing sequence.
+
+    What 12-digit number do you form by concatenating the three terms in this 
+    sequence?
+    """
     # Return an iterable of the numbers formed by permuting digits of n.
     permute = lambda n: imap(lambda p: int(''.join(p)), permutations(str(n)))
 
@@ -39,4 +38,28 @@ def problem49():
       imap(lambda prime: ifilter(numberfilter, permute(prime)), \
       ifilter(isprime, xrange(1000, 10000)))))))).next()
 
-print problem49()
+def problem101():
+    """
+    Consider the following tenth degree polynomial generating function:
+
+    u_n = 1 - n + n^2 - n^3 + n^4 - n^5 + n^6 - n^7 + n^8 - n^9 + n^10
+
+    Find the sum of FITs for the BOPs.
+    """
+    # General algorthim:
+    #
+    # The given function u is 10th-order, so assume no BOPs exist at OP(11, -).
+    # For 1 <= k <= 10, calculate OP(k, n) for a general n, and get the first 
+    # term in sequence OP(k, 1), OP(k, 2), ..., where that term disagrees with 
+    # u(n). Compute a vector of these such values whose sum should be the 
+    # answer.
+    u = lambda n: (n-1)*n*(n**4+n**3+n**2+n+1)*((n-1)*n*(n**2+1)+1)+1 # factored
+    OP = lambda k, n: polyval(polyfit(range(1, k + 1), 
+                              map(u, xrange(1, k + 1)), k - 1), n)
+
+    return reduce(lambda s, (k, uk, tk): s + tk, 
+                  filter(lambda (k, uk, tk): not approx_equal(uk, tk), 
+                         map(lambda k: (k, u(k + 1), OP(k, k + 1)), 
+                             xrange(1, 11))), 0)
+
+
