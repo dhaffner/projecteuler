@@ -1,5 +1,5 @@
 #!/usr/binpython
-from itertools import chain
+from itertools import chain, count, ifilter
 from random import randint
 
 # Miller-Rabin primality test.
@@ -10,7 +10,7 @@ def millrab(n, max=30):
     http://www.wikipedia.org/wiki/Miller-Rabin_primality_test
     Returns probability p is prime: either p = 0 or ~1,
     """
-    if not n%2: return 0
+    if not n%2: return n == 2
     k = 0
     z = n - 1
 
@@ -41,6 +41,10 @@ def millrab(n, max=30):
             
     if ok:  return 1 - p
     else:   return 0
+
+
+def primes(start=2):
+    return ifilter(isprime, count(start))
 
 def isprime(n):
 	return millrab(n) > 0

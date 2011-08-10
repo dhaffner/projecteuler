@@ -1,6 +1,6 @@
 #!/usr/bin/python
-from itertools import ifilter, imap, permutations
-from itertools import combinations, chain, dropwhile
+from itertools import ifilter, imap, permutations, count
+from itertools import combinations, chain, dropwhile, takewhile
 from helpers import *
 from operator import add
 
@@ -61,5 +61,21 @@ def problem101():
                   filter(lambda (k, uk, tk): not approx_equal(uk, tk), 
                          map(lambda k: (k, u(k + 1), OP(k, k + 1)), 
                              xrange(1, 11))), 0)
+
+def problem38():
+    ceiling = 987654321
+    digits = set(range(1, 10))
+    def is_pandigital(n):
+        return set(map(int, str(n))) == digits
+
+    def concat_prod(k, n):
+        return int(reduce(add, (str(k*i) for i in xrange(1, n+1))))
+
+    def form_num(k):
+        return ifilter(is_pandigital, takewhile(lambda i: i <= ceiling, (concat_prod(k, n) for n in count(2))))
+
+    return max(flatten(form_num(k) for k in xrange(192, 100000)))
+
+
 
 
